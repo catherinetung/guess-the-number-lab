@@ -12,12 +12,13 @@ const game = {
       // console.log(this.getGuess())
       // console.log(this.secretNum)
       do {
-        guesses = this.getGuess();{
-          console.log(guesses)
-        }
+        guesses = this.getGuess();
+          // if (isNaN(guesses) === false);
+          console.log(guesses);
         //this calls the getGuess function and saves it as a variable, guesses
             this.prevGuesses.push(guesses);
             console.log(this.prevGuesses);
+            this.render();
             //this pops it into the prevGuesses array
           }
       while (this.secretNum !== this.prevGuesses[this.prevGuesses.length - 1]);
@@ -33,15 +34,25 @@ const game = {
     //this does not fit the condition so it will start the while loop
     while (myNum < this.smallestNum || isNaN(myNum) || myNum > this.biggestNum) {
       myNum = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
-      return myNum
       // console.log(typeof(myNum), myNum)
     //this keeps it looping until the conditions are met, also properly converts it to a number
     //it is currently recording each value, even when it is NaN
     //parsInt to make it from a string to a number
-  }
-
-  }
-}
+  } return myNum
+},
+  //here in render, I need to create a function that will show an alert() saying either - if the the prev.Guesses[this.prevGuesses.length =1] === secretNum, "Congrats! You guessed the number in [number of prevGuesses]!" else if Your guess is too [high|low] Previous guesses: x, x, x, x
+  //it needs to be triggered after every guess - so it will be placed in the do...while loop
+  //I need it to access the prevGuesses array to print out the previous guesses
+  render: function() {
+    if (this.secretNum < this.prevGuesses[this.prevGuesses.length - 1]) {
+      alert(`Your guess is too high! Previous guesses: ${this.prevGuesses} `)
+    } else if (this.secretNum > this.prevGuesses[this.prevGuesses.length - 1]) {
+      alert(`Your guess is too low! Previous guesses: ${this.prevGuesses}`)
+    } else {
+      alert(`Congrats! You guessed the number in ${this.prevGuesses.length} guesses!`)
+    }
+      } 
+      }
 game.play()
 //console.log(game.play())
 // game.getGuess()
